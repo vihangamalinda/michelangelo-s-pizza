@@ -5,9 +5,13 @@ import Cart from "./features/cart/Cart"
 import Order from "./features/order/Order"
 import CreateOrder from './features/order/CreateOrder'
 import './App.css'
+import AppLayout from './ui/AppLayout'
 
 const router = createBrowserRouter([
   {
+    element:<AppLayout/>,
+    children:[
+ {
     path: "/",
     element: <Home />,
   },
@@ -27,6 +31,9 @@ const router = createBrowserRouter([
     path: "/order/:orderId",
     element: <Order />,
   },
+    ]
+  },
+ 
 ]);
 
 function App() {
