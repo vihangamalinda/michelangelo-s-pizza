@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
-import { formatCurrency } from "../../utilities/helpers";
+import { formatCurrency } from '../../utilities/helpers';
 function MenuItem({ pizza }) {
   const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
-  console.log(id)
+  console.log(id);
   return (
     <li>
       <img src={imageUrl} alt={name} />

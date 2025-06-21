@@ -1,32 +1,32 @@
 /* eslint-disable no-unused-vars */
-import { useState } from "react";
-import { Form, redirect, useActionData, useNavigation } from "react-router-dom";
-import { createOrder } from "../../services/apiRestaurant";
+import { useState } from 'react';
+import { Form, redirect, useActionData, useNavigation } from 'react-router-dom';
+import { createOrder } from '../../services/apiRestaurant';
 
 // https://uibakery.io/regex-library/phone-number
 const isValidPhone = (str) =>
   /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
-    str
+    str,
   );
 
 const fakeCart = [
   {
     pizzaId: 12,
-    name: "Mediterranean",
+    name: 'Mediterranean',
     quantity: 2,
     unitPrice: 16,
     totalPrice: 32,
   },
   {
     pizzaId: 6,
-    name: "Vegetale",
+    name: 'Vegetale',
     quantity: 1,
     unitPrice: 13,
     totalPrice: 13,
   },
   {
     pizzaId: 11,
-    name: "Spinach and Mushroom",
+    name: 'Spinach and Mushroom',
     quantity: 1,
     unitPrice: 15,
     totalPrice: 15,
@@ -34,8 +34,8 @@ const fakeCart = [
 ];
 
 function CreateOrder() {
-  const navigation = useNavigation()
-  const isSubmitting = navigation.state === "submitting"
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === 'submitting';
   const formErrors = useActionData();
   // const [withPriority, setWithPriority] = useState(false);
   const cart = fakeCart;
@@ -77,36 +77,35 @@ function CreateOrder() {
         </div>
 
         <div>
-          <input type="hidden" name="cart" value={JSON.stringify(cart)}/>
-          <button disabled={isSubmitting}>{isSubmitting? "Placing order ...":"Order now"}</button>
+          <input type="hidden" name="cart" value={JSON.stringify(cart)} />
+          <button disabled={isSubmitting}>
+            {isSubmitting ? 'Placing order ...' : 'Order now'}
+          </button>
         </div>
       </Form>
     </div>
   );
 }
 
-export async function action({request}){
-  const formData= await request.formData();
-  const data= Object.fromEntries(formData);
+export async function action({ request }) {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
   // console.log(data)
-  const order ={
+  const order = {
     ...data,
     cart: JSON.parse(data.cart),
-    priority: data.priority && data.priority=="on"? true:false
-  }
+    priority: data.priority && data.priority == 'on' ? true : false,
+  };
   // console.log(order);
 
-  const error ={};
-  if(!isValidPhone(order.phone)){
-    error.phone =" Please give us our number to contact if needed.";
+  const error = {};
+  if (!isValidPhone(order.phone)) {
+    error.phone = ' Please give us our number to contact if needed.';
   }
 
-  if(Object.keys(error).length >0) return error;
-
-
+  if (Object.keys(error).length > 0) return error;
 
   const newOrder = await createOrder(order);
-
 
   return redirect(`/order/${newOrder.id}`);
 }
