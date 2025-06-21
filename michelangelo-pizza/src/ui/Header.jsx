@@ -13,7 +13,9 @@ function Header() {
             className="hidden max-w-[80px] rounded-3xl sm:block"
           />
 
-          <p className="mx-3">To Michelangelo&apos;s Pizz 🍕</p>
+          <p className="mx-3 rounded p-2 shadow-inner">
+            To Michelangelo&apos;s Pizz 🍕
+          </p>
         </div>
       </Link>
       <SearchOrder />
