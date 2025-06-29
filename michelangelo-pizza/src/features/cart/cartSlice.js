@@ -45,6 +45,15 @@ const cartSlice = createSlice({
   },
 });
 
+
+// Use 'reselect' library on large application for selectors to overcome performace issues
+const getTotalCartItems = (state) =>
+  state.cart.cart.reduce((acc, item) => item.quantity + acc, 0);
+const getTotalPrice = (state) =>
+  state.cart.cart.reduce((acc, item) => item.totalPrice + acc, 0);
+const getCart =(state)=> state.cart.cart;
+
+export{getCart,getTotalCartItems,getTotalPrice};
 export const {
   addItem,
   deleteItem,
