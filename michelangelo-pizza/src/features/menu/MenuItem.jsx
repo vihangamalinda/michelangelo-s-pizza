@@ -4,7 +4,7 @@ import Button from '../../ui/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../cart/cartSlice';
 import DeleteItem from '../cart/DeleteItem';
-import {getCurrentQuantityById} from '../cart/cartSlice'
+import { getCurrentQuantityById } from '../cart/cartSlice';
 
 function MenuItem({ pizza }) {
   const dispatch = useDispatch();

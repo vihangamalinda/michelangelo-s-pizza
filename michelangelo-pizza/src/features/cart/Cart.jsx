@@ -5,16 +5,16 @@ import LinkButton from '../../ui/LinkButton';
 import Button from '../../ui/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearCart, getCart } from './cartSlice';
-import EmptyCart from "./EmptyCart"
+import EmptyCart from './EmptyCart';
 
 function Cart() {
   const dispatch = useDispatch();
   const cart = useSelector(getCart);
 
-  if(!cart.length){
-    return <EmptyCart/>
+  if (!cart.length) {
+    return <EmptyCart />;
   }
-  
+
   return (
     <div className="px-4 py-3">
       <LinkButton

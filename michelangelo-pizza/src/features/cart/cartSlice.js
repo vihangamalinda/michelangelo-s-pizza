@@ -1,8 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  cart: [
-  ],
+  cart: [],
 };
 
 const cartSlice = createSlice({
@@ -13,7 +12,7 @@ const cartSlice = createSlice({
       state.cart.push(action.payload);
     },
     deleteItem(state, action) {
-      state.cart =state.cart.filter((item) => item.pizzaId !== action.payload);
+      state.cart = state.cart.filter((item) => item.pizzaId !== action.payload);
     },
     increaseItemQuantity(state, action) {
       const pizzaId = action.payload;
@@ -45,16 +44,18 @@ const cartSlice = createSlice({
   },
 });
 
-
 // Use 'reselect' library on large application for selectors to overcome performace issues
 const getTotalCartItems = (state) =>
   state.cart.cart.reduce((acc, item) => item.quantity + acc, 0);
 const getTotalPrice = (state) =>
   state.cart.cart.reduce((acc, item) => item.totalPrice + acc, 0);
-const getCart =(state)=> state.cart.cart;
-const getCurrentQuantityById = (id)=>(state) => state.cart.cart.filter((item)=>item.pizzaId===id).reduce((_,item)=>item.quantity,0)
+const getCart = (state) => state.cart.cart;
+const getCurrentQuantityById = (id) => (state) =>
+  state.cart.cart
+    .filter((item) => item.pizzaId === id)
+    .reduce((_, item) => item.quantity, 0);
 
-export{getCart,getTotalCartItems,getTotalPrice,getCurrentQuantityById};
+export { getCart, getTotalCartItems, getTotalPrice, getCurrentQuantityById };
 export const {
   addItem,
   deleteItem,

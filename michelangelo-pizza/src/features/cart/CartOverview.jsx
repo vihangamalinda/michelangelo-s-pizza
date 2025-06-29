@@ -6,7 +6,7 @@ function CartOverview() {
   const totalCartQuantity = useSelector(getTotalCartItems);
   const totalPrice = useSelector(getTotalPrice);
 
-  if(!totalCartQuantity) return null;
+  if (!totalCartQuantity) return null;
 
   return (
     <div className="flex items-center justify-between bg-zinc-800 px-4 py-4 text-sm uppercase text-zinc-200 sm:px-6 md:text-base">
