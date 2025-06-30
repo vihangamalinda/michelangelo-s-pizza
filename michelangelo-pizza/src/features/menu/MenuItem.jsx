@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../cart/cartSlice';
 import DeleteItem from '../cart/DeleteItem';
 import { getCurrentQuantityById } from '../cart/cartSlice';
+import UpdateItemQuantity from '../cart/UpdateItemQuantity';
 
 function MenuItem({ pizza }) {
   const dispatch = useDispatch();
@@ -44,7 +45,15 @@ function MenuItem({ pizza }) {
             </p>
           )}
 
-          {isInCart ? <DeleteItem pizzaId={id} /> : ''}
+          {isInCart &&(
+            <div className='felx gap-3 items-center sm:gap-8'>
+              <UpdateItemQuantity
+                pizzaId={id}
+                currentItemQuantity={currentQuantity}
+              />
+              <DeleteItem pizzaId={id} />
+            </div>
+          ) }
           {!soldOut && !isInCart ? (
             <Button type="small" onClick={handleAddCart}>
               Add to cart
