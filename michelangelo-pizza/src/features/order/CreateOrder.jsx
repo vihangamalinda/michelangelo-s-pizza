@@ -3,8 +3,8 @@ import { Form, redirect, useActionData, useNavigation } from 'react-router-dom';
 import { createOrder } from '../../services/apiRestaurant';
 import Button from '../../ui/Button';
 import { useSelector } from 'react-redux';
-import {getCart,clearCart, getTotalPrice} from '../cart/cartSlice';
-import store from '../../store'
+import { getCart, clearCart, getTotalPrice } from '../cart/cartSlice';
+import store from '../../store';
 import { useState } from 'react';
 import { formatCurrency } from '../../utilities/helpers';
 // https://uibakery.io/regex-library/phone-number
@@ -19,7 +19,7 @@ function CreateOrder() {
   const formErrors = useActionData();
   const [withPriority, setWithPriority] = useState(false);
   const cart = useSelector(getCart);
-  const  totalOrderPrice = useSelector(getTotalPrice);
+  const totalOrderPrice = useSelector(getTotalPrice);
   const prioritizeCharge = withPriority ? totalOrderPrice * 0.2 : 0;
   const totalPrice = totalOrderPrice + prioritizeCharge;
 
@@ -86,7 +86,9 @@ function CreateOrder() {
         <div>
           <input type="hidden" name="cart" value={JSON.stringify(cart)} />
           <Button type="primary" isDisabled={isSubmitting}>
-            {isSubmitting ? 'Placing order ...' : `Order now for: ${formatCurrency(totalPrice)}`}
+            {isSubmitting
+              ? 'Placing order ...'
+              : `Order now for: ${formatCurrency(totalPrice)}`}
           </Button>
         </div>
       </Form>
@@ -114,7 +116,7 @@ export async function action({ request }) {
 
   const newOrder = await createOrder(order);
 
-  store.dispatch(clearCart())
+  store.dispatch(clearCart());
   return redirect(`/order/${newOrder.id}`);
 }
 
