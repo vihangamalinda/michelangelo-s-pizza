@@ -31,7 +31,7 @@ const cartSlice = createSlice({
         item.totalPrice = item.unitPrice * item.quantity;
 
         if (!item.quantity) {
-          cartSlice.caseReducers.deleteItem(state,action);
+          cartSlice.caseReducers.deleteItem(state, action);
         }
       }
     },
