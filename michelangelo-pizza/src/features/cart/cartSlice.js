@@ -31,9 +31,7 @@ const cartSlice = createSlice({
         item.totalPrice = item.unitPrice * item.quantity;
 
         if (!item.quantity) {
-          state.cart = state.cart.filter(
-            (cartItem) => cartItem.pizzaId !== pizzaId,
-          );
+          cartSlice.caseReducers.deleteItem(state,action);
         }
       }
     },
