@@ -10,7 +10,7 @@ import EmptyCart from './EmptyCart';
 function Cart() {
   const dispatch = useDispatch();
   const cart = useSelector(getCart);
-  const userName = useSelector(state=>state.user.userName);
+  const userName = useSelector((state) => state.user.userName);
 
   if (!cart.length) {
     return <EmptyCart />;

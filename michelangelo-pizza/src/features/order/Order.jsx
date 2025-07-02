@@ -58,7 +58,7 @@ function Order() {
             item={item}
             key={item.pizzaId}
             ingredients={getIngredientsByPizzaId(item.pizzaId)}
-            isLoadingIngredients={fetcher.state==="loading"}
+            isLoadingIngredients={fetcher.state === 'loading'}
           />
         ))}
       </ul>
