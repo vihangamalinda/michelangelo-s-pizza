@@ -10,6 +10,7 @@ import EmptyCart from './EmptyCart';
 function Cart() {
   const dispatch = useDispatch();
   const cart = useSelector(getCart);
+  const userName = useSelector(state=>state.user.userName);
 
   if (!cart.length) {
     return <EmptyCart />;
@@ -24,7 +25,7 @@ function Cart() {
         &larr; Back to menu
       </LinkButton>
 
-      <h2 className="mt-7 text-xl font-semibold"> Your cart, %NAME%</h2>
+      <h2 className="mt-7 text-xl font-semibold"> Your cart, {userName}</h2>
 
       <ul className="mt-3 divide-y divide-stone-200 border-b">
         {cart.map((item) => (
