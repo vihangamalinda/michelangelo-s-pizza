@@ -137,13 +137,11 @@ function CreateOrder() {
 export async function action({ request }) {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-  // console.log(data)
   const order = {
     ...data,
     cart: JSON.parse(data.cart),
     priority: data.priority && data.priority == 'true',
   };
-  // console.log(order);
 
   const error = {};
   if (!isValidPhone(order.phone)) {
@@ -151,8 +149,6 @@ export async function action({ request }) {
   }
 
   if (Object.keys(error).length > 0) return error;
-
-  console.log(order);
 
   const newOrder = await createOrder(order);
 
