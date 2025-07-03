@@ -8,8 +8,10 @@ import {
 } from '../../utilities/helpers.js';
 
 import { getOrder } from '../../services/apiRestaurant.js';
-import { useLoaderData } from 'react-router-dom';
+import { useFetcher, useLoaderData } from 'react-router-dom';
 import OrderItem from './OrderItem.jsx';
+import { useEffect } from 'react';
+import UpdateOrder from './UpdateOrder.jsx';
 
 function Order() {
   const order = useLoaderData();
@@ -24,6 +26,16 @@ function Order() {
     cart,
   } = order;
   const deliveryIn = calcMinutesLeft(estimatedDelivery);
+  const fetcher = useFetcher();
+
+  useEffect(() => {
+    if (!fetcher.data && fetcher.state === 'idle') {
+      fetcher.load('/menu');
+    }
+  }, [fetcher]);
+
+  const getIngredientsByPizzaId = (id) =>
+    fetcher.data?.find((el) => el.id === id).ingredients ?? [];
 
   return (
     <div className="space-y-8 px-4 py-6">
@@ -43,7 +55,12 @@ function Order() {
       </div>
       <ul className="divide-y divide-stone-200 border-b border-t">
         {cart.map((item) => (
-          <OrderItem item={item} key={item.id} />
+          <OrderItem
+            item={item}
+            key={item.pizzaId}
+            ingredients={getIngredientsByPizzaId(item.pizzaId)}
+            isLoadingIngredients={fetcher.state === 'loading'}
+          />
         ))}
       </ul>
       <div className="gp-2 flex flex-wrap items-center justify-between bg-stone-200 px-6 py-5">
@@ -70,6 +87,7 @@ function Order() {
           To pay on delivery: {formatCurrency(orderPrice + priorityPrice)}
         </p>
       </div>
+      {!priority && <UpdateOrder order={order} />}
     </div>
   );
 }
