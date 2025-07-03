@@ -2,8 +2,6 @@ import { formatCurrency } from '../../utilities/helpers.js';
 function OrderItem({ item, isLoadingIngredients, ingredients }) {
   const { quantity, name, totalPrice } = item;
 
-  console.log(ingredients);
-  console.log(isLoadingIngredients);
   return (
     <li className="py-3">
       <div className="flex items-center justify-between gap-4 text-sm">
