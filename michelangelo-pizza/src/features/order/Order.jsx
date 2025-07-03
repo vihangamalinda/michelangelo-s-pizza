@@ -93,7 +93,6 @@ function Order() {
 }
 
 export async function loader({ params }) {
-  console.log(params);
   const result = await getOrder(params.orderId);
   return result;
 }
